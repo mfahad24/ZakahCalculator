@@ -1,7 +1,9 @@
+import ZakahCalculator from "./components/ZakahCalculator";
+
 import "./App.css";
 
-function App() {
-  return <>Zakah Calculator</>;
-}
+const App = () => {
+  return <ZakahCalculator />;
+};
 
 export default App;

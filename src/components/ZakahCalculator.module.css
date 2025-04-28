@@ -1,0 +1,198 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.left,
+.right {
+  padding: 0 50px;
+}
+
+.left {
+  width: 40%;
+  line-height: 2;
+  border-radius: 5px;
+  background-color: lightgrey;
+}
+
+.right {
+  width: 60%;
+}
+
+.right > input {
+  display: block;
+  width: 98%;
+  margin-bottom: 15px;
+  font-size: 18px;
+  height: 30px;
+  /* border-radius: 5px;  */
+  /* border: 2px solid rgb(110, 109, 109) */
+}
+
+.label {
+  font-size: 15px; 
+}
+
+.label > p {
+  margin-block-end: 0.3em;
+}
+
+.header {
+  text-align: center;
+  margin-block: 0;
+}
+
+.description {
+  font-size: 15px;
+  margin-block-start: 0;
+}
+
+.amount {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.goldLoading {
+  text-align: center;
+  background-color: lightgrey;
+  padding: 10px;
+  margin: -10px;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  position: sticky;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.dots::after {
+  content: "...";
+  display: inline-block;
+  width: 1.5em;
+  text-align: left;
+  animation: dotsAnim 1s steps(3, end) infinite;
+}
+
+@keyframes dotsAnim {
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+}
+
+.nisabValue {
+  font-size: 15px;
+}
+
+.helpTip {
+  color: red;
+  margin-top: 0px;
+  font-weight: bold;
+  font-size: 14px; 
+}
+
+.right > input:first-of-type {
+  margin-bottom: 5px;
+}
+
+.spinner {
+  color: #007bff;
+  font-size: 15px;
+}
+.error {
+  color: red;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+a:visited {
+  color: #0000ee;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .left {
+    line-height: 1.5;
+    padding: 25px;
+  }
+
+  .header {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  .root {
+    flex-direction: column;
+  }
+
+  .left,
+  .right {
+    width: 98%;
+    padding: 0 10px;
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .left {
+    line-height: 1;
+  }
+
+  .amount {
+    font-size: 13px;
+  }
+
+  .totals {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: whitesmoke;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  }
+
+  .amount {
+    flex-direction: row;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    padding: 0px 20px;
+  }
+
+  .header {
+    margin-top: 70px;
+    font-size: 20px;
+  }
+
+  .right > input {
+    height: 20px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .header {
+    margin-bottom: 15px; 
+  }
+
+  .amount .error {
+    font-size: 13px; 
+  }
+}

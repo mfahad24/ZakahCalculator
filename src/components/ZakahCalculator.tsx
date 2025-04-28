@@ -1,0 +1,238 @@
+import { useState, useEffect, useRef } from "react";
+import Cookies from "js-cookie";
+
+import Inputs from "./Inputs.js";
+import Header from "./Header";
+import Nisab from "./Nisab";
+import Totals from "./Totals";
+
+import styles from "./ZakahCalculator.module.css";
+
+/*
+- tests
+- create excel sheet for all locale text
+- readme
+- add google analytics + SEO
+*/
+
+type Data = {
+  id: string;
+  label: React.ReactNode;
+  value: number | null;
+};
+
+const ZakahCalculator = () => {
+  const [data, setData] = useState<Data[]>([
+    {
+      id: "userNisab",
+      label: <p>1. Enter your own nisab value (optional)</p>,
+      value: null,
+    },
+    {
+      id: "cashOnHand",
+      label: (
+        <p>2. Cash on hand and in back accounts (savings, checking, etc)</p>
+      ),
+      value: null,
+    },
+    {
+      id: "loans",
+      label: <p>3. Non-delinquent loans (money you loaned to others)</p>,
+      value: null,
+    },
+    {
+      id: "gold",
+      label: <p>4. Value of gold, silver and precious items</p>,
+      value: null,
+    },
+    {
+      id: "stocks",
+      label: <p>5. Value of shares and stocks</p>,
+      value: null,
+    },
+    {
+      id: "401k",
+      label: (
+        <p>
+          6. Net value of IRA, 401K, pension funds if liquidated as of the zakat
+          payment date (adjusted for taxes and penalties, if applicable)
+        </p>
+      ),
+      value: null,
+    },
+    {
+      id: "business",
+      label: <p>7. Net value of business inventory and trade goods</p>,
+      value: null,
+    },
+    {
+      id: "realEstate",
+      label: <p>8. Equity in investment real estate</p>,
+      value: null,
+    },
+  ]);
+  const [nisabValue, setNisabValue] = useState(null);
+  const [nisabError, setNisabError] = useState("");
+  const [loadingGoldValue, setLoadingGoldValue] = useState(true);
+  const [userNisabEmpty, setUserNisabEmpty] = useState(false);
+  const [isNegative, setIsNegative] = useState(false);
+  const [isAboveMax, setIsAboveMax] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const goldApiKey = import.meta.env.VITE_GOLD_API_KEY;
+  // const jsonBinApiKey = import.meta.env.VITE_JSONBIN_API_KEY;
+  const goldApiUrl = "https://www.goldapi.io/api/XAU/USD/";
+  // const jsonBinApiUrl =
+  //   "https://api.jsonbin.io/v3/b/680a92f28561e97a5006d11b?meta=false";
+
+  useEffect(() => {
+    const fetchGoldPrice = async () => {
+      const storedNisabValue = Cookies.get("nisabValue");
+      const isStoredValueIsANumber = typeof Number(storedNisabValue) === Number; //rules out string values of null, undefined
+
+      if (isStoredValueIsANumber) {
+        console.log(`using gold value from cookies: $${storedNisabValue}`);
+        setTimeout(() => {
+          setNisabValue(Number(storedNisabValue));
+          setLoadingGoldValue(false);
+        }, 2000);
+      } else {
+        try {
+          const response = await fetch(goldApiUrl, {
+            method: "GET",
+            headers: {
+              "x-access-token": goldApiKey,
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const result = await response.json();
+          const nisabValue = (result.price * 3).toFixed(2);
+          setNisabValue(nisabValue);
+          Cookies.set("nisabValue", nisabValue, { expires: 1 });
+        } catch (error) {
+          setNisabError(
+            <span className={styles.error}>
+              Unable to retrieve nisab value. Please enter your own.
+            </span>
+          );
+          console.error("Failed to fetch gold price -> ", error);
+        } finally {
+          setLoadingGoldValue(false);
+        }
+      }
+    };
+
+    fetchGoldPrice();
+  }, []);
+
+  // useEffect(() => {
+  //   const getNisabFromDb = async () => {
+  //     const response = await fetch(jsonBinApiUrl, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "x-master-key": jsonBinApiKey,
+  //       },
+  //       body: JSON.stringify({ value: 1500 }),
+  //     });
+
+  //     const finalResult = await response.json();
+  //     console.log(finalResult);
+  //   };
+
+  //   getNisabFromDb();
+  // }, []);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [nisabError]);
+
+  const onChange = (id: string, value: number) => {
+    // if (value < 0) {
+    //   return Math.abs(value);
+    // }
+    setData((prevData) =>
+      prevData.map((item: { id: string }) =>
+        item.id === id ? { ...item, value } : item
+      )
+    );
+  };
+
+  const onBlur = (evt, id) => {
+    if (id === "userNisab" && nisabError) {
+      if (evt.target.value === "") {
+        setUserNisabEmpty(true);
+      } else {
+        setUserNisabEmpty(false);
+      }
+    }
+
+    if (evt.target.value < 0 || data.some((d) => d.value < 0)) {
+      setIsNegative(true);
+    } else {
+      setIsNegative(false);
+    }
+
+    if (
+      evt.target.value >= 1000000000 ||
+      data.some((d) => d.value >= 1000000000)
+    ) {
+      setIsAboveMax(true);
+    } else {
+      setIsAboveMax(false);
+    }
+  };
+
+  return (
+    <>
+      <div className={styles.root}>
+        <div className={styles.left}>
+          <Header />
+          <Totals
+            data={data}
+            nisabValue={nisabValue}
+            isAboveMax={isAboveMax}
+            isNegative={isNegative}
+            userNisabEmpty={userNisabEmpty}
+          />
+        </div>
+        <div className={styles.right}>
+          <Nisab
+            loadingGoldValue={loadingGoldValue}
+            nisabError={nisabError}
+            nisabValue={nisabValue}
+          />
+          {isNegative ? (
+            <p className={styles.error}>
+              Please enter a number greater than or equal to 0
+            </p>
+          ) : null}
+          {isAboveMax ? (
+            <p className={styles.error}>
+              Please enter a value below $1,000,000,000
+            </p>
+          ) : null}
+          <Inputs
+            data={data}
+            inputRef={inputRef}
+            isNegative={isNegative}
+            loadingGoldValue={loadingGoldValue}
+            nisabError={nisabError}
+            onChange={onChange}
+            onBlur={onBlur}
+            userNisabEmpty={userNisabEmpty}
+          />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ZakahCalculator;
