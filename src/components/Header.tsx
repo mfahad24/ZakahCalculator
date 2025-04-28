@@ -16,11 +16,7 @@ const Header = () => {
         </a>{" "}
         or have your own nisab value from a different source, enter it on line
         1.
-        {/* <a href="https://www.monex.com/gold-prices/" target="_blank">
-          click here for price of gold today
-        </a> */}
       </p>
-      {/* <br /> */}
       <p className={`${styles.description} ${styles.secondary}`}>
         Should you have any questions about Zakah please contact the{" "}
         <a

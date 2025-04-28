@@ -155,9 +155,6 @@ const ZakahCalculator = () => {
   }, [nisabError]);
 
   const onChange = (id: string, value: number) => {
-    // if (value < 0) {
-    //   return Math.abs(value);
-    // }
     setData((prevData) =>
       prevData.map((item: { id: string }) =>
         item.id === id ? { ...item, value } : item

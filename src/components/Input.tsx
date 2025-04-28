@@ -1,11 +1,9 @@
 import styles from "./ZakahCalculator.module.css";
 
 const Input = ({
-  activeElement,
   disabled,
   id,
   inputRef,
-  isNegative,
   label,
   onBlur,
   onChange,
@@ -30,7 +28,6 @@ const Input = ({
         {label}
       </label>
       <input
-        // min={0}
         className={styles.input}
         disabled={disabled}
         id={id}
