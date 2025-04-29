@@ -21,7 +21,7 @@ const Input = ({
   userNisabEmpty: boolean;
   value: string;
 }) => {
-  console.log(inputRef);
+  // console.log(inputRef);
   return (
     <>
       <label className={styles.label} htmlFor={id}>

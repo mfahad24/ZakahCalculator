@@ -17,7 +17,7 @@ const Header = () => {
         or have your own nisab value from a different source, enter it on line
         1.
       </p>
-      <p className={`${styles.description} ${styles.secondary}`}>
+      <p className={styles.description}>
         Should you have any questions about Zakah please contact the{" "}
         <a
           href="https://www.amjaonline.org/fatwa/en/79978/Zakah"

@@ -81,72 +81,131 @@ const ZakahCalculator = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const goldApiKey = import.meta.env.VITE_GOLD_API_KEY;
-  // const jsonBinApiKey = import.meta.env.VITE_JSONBIN_API_KEY;
+  const jsonBinApiKey = import.meta.env.VITE_JSONBIN_API_KEY;
   const goldApiUrl = "https://www.goldapi.io/api/XAU/USD/";
-  // const jsonBinApiUrl =
-  //   "https://api.jsonbin.io/v3/b/680a92f28561e97a5006d11b?meta=false";
+  const jsonBinApiUrl = "https://api.jsonbin.io/v3/b/680a92f28561e97a5006d11b";
+
+  const postNisabToDb = async (value: { value: string; expiresAt: number }) => {
+    try {
+      const response = await fetch(jsonBinApiUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-key": jsonBinApiKey,
+        },
+        body: JSON.stringify(value),
+      });
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.log("\x1b[31m%s\x1b[0m", "Failed to POST to json bin -> ", error);
+    }
+  };
+
+  const getNisabFromDb = async () => {
+    try {
+      const response = await fetch(`${jsonBinApiUrl}?meta=false`, {
+        method: "GET",
+        headers: {
+          "X-Master-key": jsonBinApiKey,
+        },
+      });
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.log(
+        "\x1b[31m%s\x1b[0m",
+        "Failed to GET from json bin -> ",
+        error
+      );
+    }
+  };
 
   useEffect(() => {
+    if (
+      !import.meta.env.VITE_JSONBIN_API_KEY ||
+      !import.meta.env.VITE_GOLD_API_KEY
+    ) {
+      throw new Error("Check your API keys in your .env file!");
+    }
+
+    /*
+    1. get value from cookies
+    2. if no cookies & value NOT EXPIRED, get value from DB
+    3. if no cookies & value EXPIRED, get value from gold API
+    */
     const fetchGoldPrice = async () => {
       const storedNisabValue = Cookies.get("nisabValue");
-      const isStoredValueIsANumber = typeof Number(storedNisabValue) === Number; //rules out string values of null, undefined
+      const invalid = ["null", "undefined"];
+      const invalidValues = invalid.includes(storedNisabValue);
 
-      if (isStoredValueIsANumber) {
-        console.log(`using gold value from cookies: $${storedNisabValue}`);
+      if (storedNisabValue && !invalidValues) {
+        console.log(
+          "\x1b[32m%s\x1b[0m",
+          `using gold value from COOKIES: $${storedNisabValue}`
+        );
         setTimeout(() => {
           setNisabValue(Number(storedNisabValue));
           setLoadingGoldValue(false);
         }, 2000);
-      } else {
-        try {
-          const response = await fetch(goldApiUrl, {
-            method: "GET",
-            headers: {
-              "x-access-token": goldApiKey,
-            },
-          });
+      } else if (storedNisabValue === null || storedNisabValue === undefined) {
+        const result = await getNisabFromDb();
+        const now = Date.now() + 24 * 60 * 60 * 1000;
+        const twentyFourHours = 20 * 60 * 60 * 1000;
 
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
+        if (now - result.expiresAt < twentyFourHours) {
+          setTimeout(() => {
+            setNisabValue(Number(result.value));
+            Cookies.set("nisabValue", result.value, { expires: 1 });
+            setLoadingGoldValue(false);
+            console.log(
+              "\x1b[32m%s\x1b[0m",
+              `using gold value from DATABASE: $${result.value}`
+            );
+          }, 2000);
+        } else {
+          try {
+            const response = await fetch(goldApiUrl, {
+              method: "GET",
+              headers: {
+                "x-access-token": goldApiKey,
+              },
+            });
+
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+
+            const result = await response.json();
+            const nisabValue = (result.price * 3).toFixed(2);
+            setNisabValue(nisabValue);
+            Cookies.set("nisabValue", nisabValue, { expires: 1 });
+            postNisabToDb({
+              value: nisabValue,
+              expiresAt: Date.now() + 24 * 60 * 60 * 1000,
+            });
+          } catch (error) {
+            setNisabError(
+              <span className={styles.error}>
+                Unable to retrieve nisab value. Please enter your own.
+              </span>
+            );
+            console.log(
+              "\x1b[31m%s\x1b[0m",
+              "Failed to fetch gold price -> ",
+              error
+            );
+          } finally {
+            setLoadingGoldValue(false);
           }
-
-          const result = await response.json();
-          const nisabValue = (result.price * 3).toFixed(2);
-          setNisabValue(nisabValue);
-          Cookies.set("nisabValue", nisabValue, { expires: 1 });
-        } catch (error) {
-          setNisabError(
-            <span className={styles.error}>
-              Unable to retrieve nisab value. Please enter your own.
-            </span>
-          );
-          console.error("Failed to fetch gold price -> ", error);
-        } finally {
-          setLoadingGoldValue(false);
         }
       }
     };
 
     fetchGoldPrice();
   }, []);
-
-  // useEffect(() => {
-  //   const getNisabFromDb = async () => {
-  //     const response = await fetch(jsonBinApiUrl, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "x-master-key": jsonBinApiKey,
-  //       },
-  //       body: JSON.stringify({ value: 1500 }),
-  //     });
-
-  //     const finalResult = await response.json();
-  //     console.log(finalResult);
-  //   };
-
-  //   getNisabFromDb();
-  // }, []);
 
   useEffect(() => {
     if (inputRef.current) {
