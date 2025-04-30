@@ -146,25 +146,25 @@ const ZakahCalculator = () => {
           "\x1b[32m%s\x1b[0m",
           `using gold value from COOKIES: $${storedNisabValue}`
         );
-        setTimeout(() => {
-          setNisabValue(Number(storedNisabValue));
-          setLoadingGoldValue(false);
-        }, 2000);
+        // setTimeout(() => {
+        setNisabValue(Number(storedNisabValue));
+        setLoadingGoldValue(false);
+        // }, 2000);
       } else if (storedNisabValue === null || storedNisabValue === undefined) {
         const result = await getNisabFromDb();
         const now = Date.now() + 24 * 60 * 60 * 1000;
         const twentyFourHours = 20 * 60 * 60 * 1000;
 
         if (now - result.expiresAt < twentyFourHours) {
-          setTimeout(() => {
-            setNisabValue(Number(result.value));
-            Cookies.set("nisabValue", result.value, { expires: 1 });
-            setLoadingGoldValue(false);
-            console.log(
-              "\x1b[32m%s\x1b[0m",
-              `using gold value from DATABASE: $${result.value}`
-            );
-          }, 2000);
+          // setTimeout(() => {
+          setNisabValue(Number(result.value));
+          Cookies.set("nisabValue", result.value, { expires: 1 });
+          setLoadingGoldValue(false);
+          console.log(
+            "\x1b[32m%s\x1b[0m",
+            `using gold value from DATABASE: $${result.value}`
+          );
+          // }, 2000);
         } else {
           try {
             const response = await fetch(goldApiUrl, {

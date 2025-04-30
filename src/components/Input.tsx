@@ -21,7 +21,6 @@ const Input = ({
   userNisabEmpty: boolean;
   value: string;
 }) => {
-  // console.log(inputRef);
   return (
     <>
       <label className={styles.label} htmlFor={id}>
@@ -29,11 +28,13 @@ const Input = ({
       </label>
       <input
         className={styles.input}
+        data-testid={id}
         disabled={disabled}
         id={id}
         ref={inputRef}
         onBlur={onBlur}
         onChange={onChange}
+        role="textbox"
         type="number"
         value={value}
       />
