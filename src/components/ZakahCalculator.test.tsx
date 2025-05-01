@@ -81,7 +81,7 @@ test("renders nisab text and value", () => {
   Cookies.get.mockReturnValue("1300");
   render(<ZakahCalculator />);
 
-  const nisab = screen.getByText("Current nisab value: $1300.00");
+  const nisab = screen.getByText("Current nisab value: $1300.00*");
   expect(nisab).toBeInTheDocument();
 });
 
@@ -98,7 +98,7 @@ test("gets value from DB if there is cookie value is null", async () => {
   render(<ZakahCalculator />);
 
   await waitFor(() => {
-    const nisab = screen.getByText("Current nisab value: $1400.00");
+    const nisab = screen.getByText("Current nisab value: $1400.00*");
     expect(nisab).toBeInTheDocument();
   });
 });
@@ -116,7 +116,7 @@ test("gets value from DB if there is cookie value is undefined", async () => {
   render(<ZakahCalculator />);
 
   await waitFor(() => {
-    const nisab = screen.getByText("Current nisab value: $1500.00");
+    const nisab = screen.getByText("Current nisab value: $1500.00*");
     expect(nisab).toBeInTheDocument();
   });
 });

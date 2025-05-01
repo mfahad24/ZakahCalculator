@@ -285,6 +285,7 @@ const ZakahCalculator = () => {
             onBlur={onBlur}
             userNisabEmpty={userNisabEmpty}
           />
+          <span className={styles.disclosure}>*updates every 24 hours</span>
         </div>
       </div>
     </>

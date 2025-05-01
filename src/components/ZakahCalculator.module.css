@@ -120,6 +120,11 @@ a:visited {
   color: #0000ee;
 }
 
+.disclosure {
+font-weight: bold; 
+font-size: 14px; 
+}
+
 /* Tablet styles */
 @media (min-width: 768px) and (max-width: 1023px) {
   .left {

@@ -26,7 +26,7 @@ const Nisab = ({
       } else {
         return `Current nisab value: ${
           nisabValue ? "$" : ""
-        }${nisabValue?.toFixed(2)}`;
+        }${nisabValue?.toFixed(2)}*`;
       }
     }
   };
