@@ -146,17 +146,15 @@ const ZakahCalculator = () => {
           "\x1b[32m%s\x1b[0m",
           `using gold value from COOKIES: $${storedNisabValue}`
         );
-        // setTimeout(() => {
+
         setNisabValue(Number(storedNisabValue));
         setLoadingGoldValue(false);
-        // }, 2000);
       } else if (storedNisabValue === null || storedNisabValue === undefined) {
         const result = await getNisabFromDb();
         const now = Date.now() + 24 * 60 * 60 * 1000;
         const twentyFourHours = 20 * 60 * 60 * 1000;
 
         if (now - result.expiresAt < twentyFourHours) {
-          // setTimeout(() => {
           setNisabValue(Number(result.value));
           Cookies.set("nisabValue", result.value, { expires: 1 });
           setLoadingGoldValue(false);
@@ -164,7 +162,6 @@ const ZakahCalculator = () => {
             "\x1b[32m%s\x1b[0m",
             `using gold value from DATABASE: $${result.value}`
           );
-          // }, 2000);
         } else {
           try {
             const response = await fetch(goldApiUrl, {
@@ -177,8 +174,8 @@ const ZakahCalculator = () => {
             if (!response.ok) {
               throw new Error("Network response was not ok");
             }
-
             const result = await response.json();
+            console.log(result);
             const nisabValue = (result.price * 3).toFixed(2);
             setNisabValue(nisabValue);
             Cookies.set("nisabValue", nisabValue, { expires: 1 });
@@ -285,7 +282,9 @@ const ZakahCalculator = () => {
             onBlur={onBlur}
             userNisabEmpty={userNisabEmpty}
           />
-          <span className={styles.disclosure}>*updates every 24 hours</span>
+          {!nisabError && (
+            <span className={styles.disclosure}>*updates every 24 hours</span>
+          )}
         </div>
       </div>
     </>

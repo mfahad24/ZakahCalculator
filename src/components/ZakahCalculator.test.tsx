@@ -85,6 +85,14 @@ test("renders nisab text and value", () => {
   expect(nisab).toBeInTheDocument();
 });
 
+test("renders updates every 24 hours disclosure at the bottom", () => {
+  Cookies.get.mockReturnValue("1300");
+  render(<ZakahCalculator />);
+
+  const disclosure = screen.getByText("*updates every 24 hours");
+  expect(disclosure).toBeInTheDocument();
+});
+
 test("gets value from DB if there is cookie value is null", async () => {
   Cookies.get.mockReturnValue(null);
 
@@ -139,9 +147,126 @@ test("loading message should render if DB expiresAt value is over 24 hours", asy
   });
 });
 
-//TODO ONCE GOLD API MONTHLY CALL IS RESET
-// test("should get value from gold API if no cookies and db value is expired", async () => {
-// });
+test("should get value from gold API if no cookies and db value is expired", async () => {
+  Cookies.get.mockReturnValue(undefined);
+
+  global.fetch = vi
+    .fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        value: "1500",
+        expiresAt: 1746033965080,
+      }),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        ask: 3231.12,
+        bid: 3229.99,
+        ch: -57.89,
+        chp: -1.76,
+        currency: "USD",
+        exchange: "FOREXCOM",
+        high_price: 3290.46,
+        low_price: 3202.075,
+        metal: "XAU",
+        open_price: 3288.445,
+        open_time: 1746057600,
+        prev_close_price: 3288.445,
+        price: 3230.55,
+        price_gram_10k: 43.2769,
+        price_gram_14k: 60.5877,
+        price_gram_16k: 69.2431,
+        price_gram_18k: 77.8984,
+        price_gram_20k: 86.5538,
+        price_gram_21k: 90.8815,
+        price_gram_22k: 95.2092,
+        price_gram_24k: 103.8646,
+        symbol: "FOREXCOM:XAUUSD",
+        timestamp: 1746129944,
+      }),
+    });
+  render(<ZakahCalculator />);
+
+  await waitFor(() => {
+    const nisab = screen.getByText("Current nisab value: $9691.65*");
+    expect(nisab).toBeInTheDocument();
+  });
+});
+
+test("should render optional user nisab text for the user nisab field", async () => {
+  Cookies.get.mockReturnValue(undefined);
+
+  global.fetch = vi
+    .fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        value: "1500",
+        expiresAt: 1746033965080,
+      }),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        ask: 3231.12,
+        bid: 3229.99,
+        ch: -57.89,
+        chp: -1.76,
+        currency: "USD",
+        exchange: "FOREXCOM",
+        high_price: 3290.46,
+        low_price: 3202.075,
+        metal: "XAU",
+        open_price: 3288.445,
+        open_time: 1746057600,
+        prev_close_price: 3288.445,
+        price: 3230.55,
+        price_gram_10k: 43.2769,
+        price_gram_14k: 60.5877,
+        price_gram_16k: 69.2431,
+        price_gram_18k: 77.8984,
+        price_gram_20k: 86.5538,
+        price_gram_21k: 90.8815,
+        price_gram_22k: 95.2092,
+        price_gram_24k: 103.8646,
+        symbol: "FOREXCOM:XAUUSD",
+        timestamp: 1746129944,
+      }),
+    });
+  render(<ZakahCalculator />);
+
+  await waitFor(() => {
+    const userNisabLabel = screen.getByText(
+      "1. Enter your own nisab value (optional)"
+    );
+    expect(userNisabLabel).toBeInTheDocument();
+  });
+});
+
+test("should render enter your own nisab value message if gold api fails", async () => {
+  Cookies.get.mockReturnValue(undefined);
+
+  global.fetch = vi
+    .fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        value: "1500",
+        expiresAt: 1746033965080,
+      }),
+    })
+    .mockRejectedValueOnce(new Error("Network Error"));
+  render(<ZakahCalculator />);
+
+  await waitFor(() => {
+    const enterYourOwnMessage = screen.getByText(
+      "1. Enter your own nisab value (required)"
+    );
+    expect(enterYourOwnMessage).toBeInTheDocument();
+  });
+});
 
 test("should render error message if negative number is entered", async () => {
   Cookies.get.mockReturnValue("1300");
@@ -154,6 +279,29 @@ test("should render error message if negative number is entered", async () => {
     expect(
       screen.getByText("Please enter a number greater than or equal to 0")
     ).toBeInTheDocument();
+  });
+});
+
+test("should render nisab value required message", async () => {
+  Cookies.get.mockReturnValue(undefined);
+
+  global.fetch = vi
+    .fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        value: "1500",
+        expiresAt: 1746033965080,
+      }),
+    })
+    .mockRejectedValueOnce(new Error("Network Error"));
+  render(<ZakahCalculator />);
+
+  const input = screen.getByTestId("userNisab");
+  await userEvent.type(input, "");
+  await userEvent.tab();
+  await waitFor(() => {
+    expect(screen.getByText("Nisab value is required")).toBeInTheDocument();
   });
 });
 
@@ -170,5 +318,3 @@ test("should render error message if number entered is $1,000,000,000 or greater
     ).toBeInTheDocument();
   });
 });
-
-//TODO "Nisab value is required" message
