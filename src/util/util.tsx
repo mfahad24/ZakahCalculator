@@ -1,12 +1,11 @@
-export const inputTotal = (data: any[] | FormData) => {
-  const total = data.reduce(
-    (accumulator: number, currentValue: { id: string; value: number }) => {
-      return (
-        currentValue.id !== "userNisab" && accumulator + currentValue.value
-      );
-    },
-    0
-  );
+import { Data } from "../components/ZakahCalculator";
+
+export const inputTotal = (data: Data[]) => {
+  const total = data.reduce((accumulator: number, currentValue: Data) => {
+    return currentValue.id !== "userNisab" && currentValue.value !== null
+      ? accumulator + currentValue.value
+      : accumulator;
+  }, 0);
   return total;
 };
 
@@ -18,12 +17,7 @@ export const zakahDue = (
   const nisab = userNisab ? userNisab : nisabValue;
   if (nisab && inputTotal >= nisab) {
     return inputTotal * 0.025;
-  }
-  // else if (!nisabValue) {
-  //   console.log(nisabValue);
-  //   return;
-  // }
-  else {
+  } else {
     return 0;
   }
 };

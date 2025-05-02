@@ -1,5 +1,7 @@
 import { inputTotal, zakahDue, formatCurrency } from "../util/util.js";
 
+import { Data } from "./ZakahCalculator.js";
+
 import styles from "./ZakahCalculator.module.css";
 
 const Totals = ({
@@ -9,8 +11,11 @@ const Totals = ({
   isNegative,
   userNisabEmpty,
 }: {
-  data: Array;
-  nisabValue: number;
+  data: Data[];
+  nisabValue: number | null;
+  isAboveMax: boolean;
+  isNegative: boolean;
+  userNisabEmpty: boolean;
 }) => {
   const renderZakahDue = (
     isAboveMax: any,

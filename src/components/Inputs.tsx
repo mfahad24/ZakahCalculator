@@ -1,4 +1,7 @@
+import { Ref } from "react";
 import Input from "./Input.js";
+
+import { Data } from "./ZakahCalculator.js";
 
 const Inputs = ({
   data,
@@ -9,6 +12,15 @@ const Inputs = ({
   onChange,
   onBlur,
   userNisabEmpty,
+}: {
+  data: Data[];
+  inputRef: Ref<HTMLInputElement>;
+  isNegative: boolean;
+  loadingGoldValue: boolean;
+  nisabError: React.ReactNode | string;
+  onBlur: (evt: React.FocusEvent<HTMLInputElement>, id: string) => void;
+  onChange: (id: string, value: number) => void;
+  userNisabEmpty: boolean;
 }) => {
   return data.map((field, index) => {
     return (
@@ -19,15 +31,18 @@ const Inputs = ({
         isNegative={isNegative}
         inputRef={field.id === "userNisab" ? inputRef : null}
         label={
-          field.id === "userNisab" && nisabError
-            ? "1. Enter your own nisab value (required)"
-            : field.label
+          field.id === "userNisab" && nisabError ? (
+            <p>1. Enter your own nisab value (required)</p>
+          ) : (
+            field.label
+          )
         }
-        onChange={(evt: { target: { id: any; value: any } }) =>
-          onChange(evt.target.id, Number(evt.target.value))
+        onChange={(evt) =>
+          //@ts-ignore
+          onChange(evt?.target?.id, Number(evt?.target?.value))
         }
         userNisabEmpty={userNisabEmpty}
-        value={!loadingGoldValue && field.value}
+        value={!loadingGoldValue ? Number(field.value) : null}
         onBlur={(evt) => onBlur(evt, field.id)}
       />
     );

@@ -6,13 +6,13 @@ const Nisab = ({
   nisabValue,
 }: {
   loadingGoldValue: boolean;
-  nisabError: string;
-  nisabValue: number;
+  nisabError: React.ReactNode | string;
+  nisabValue: number | null;
 }) => {
   const renderNisabMessage = (
     loadingGoldValue: boolean,
-    nisabValue: number,
-    nisabError: string
+    nisabValue: number | null,
+    nisabError: React.ReactNode | string
   ) => {
     if (nisabError) {
       return nisabError;

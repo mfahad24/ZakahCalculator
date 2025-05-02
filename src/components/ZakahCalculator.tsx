@@ -15,7 +15,7 @@ import styles from "./ZakahCalculator.module.css";
 - add google analytics + SEO
 */
 
-type Data = {
+export type Data = {
   id: string;
   label: React.ReactNode;
   value: number | null;
@@ -71,8 +71,8 @@ const ZakahCalculator = () => {
       value: null,
     },
   ]);
-  const [nisabValue, setNisabValue] = useState(null);
-  const [nisabError, setNisabError] = useState("");
+  const [nisabValue, setNisabValue] = useState<number | null>(null);
+  const [nisabError, setNisabError] = useState<React.ReactNode | string>("");
   const [loadingGoldValue, setLoadingGoldValue] = useState(true);
   const [userNisabEmpty, setUserNisabEmpty] = useState(false);
   const [isNegative, setIsNegative] = useState(false);
@@ -139,7 +139,8 @@ const ZakahCalculator = () => {
     const fetchGoldPrice = async () => {
       const storedNisabValue = Cookies.get("nisabValue");
       const invalid = ["null", "undefined"];
-      const invalidValues = invalid.includes(storedNisabValue);
+      const invalidValues =
+        storedNisabValue && invalid.includes(storedNisabValue);
 
       if (storedNisabValue && !invalidValues) {
         console.log(
@@ -175,9 +176,9 @@ const ZakahCalculator = () => {
               throw new Error("Network response was not ok");
             }
             const result = await response.json();
-            console.log(result);
             const nisabValue = (result.price * 3).toFixed(2);
-            setNisabValue(nisabValue);
+
+            setNisabValue(Number(nisabValue));
             Cookies.set("nisabValue", nisabValue, { expires: 1 });
             postNisabToDb({
               value: nisabValue,
@@ -210,15 +211,13 @@ const ZakahCalculator = () => {
     }
   }, [nisabError]);
 
-  const onChange = (id: string, value: number) => {
+  const onChange = (id: string, value: number): void => {
     setData((prevData) =>
-      prevData.map((item: { id: string }) =>
-        item.id === id ? { ...item, value } : item
-      )
+      prevData.map((item: Data) => (item.id === id ? { ...item, value } : item))
     );
   };
-
-  const onBlur = (evt, id) => {
+  
+  const onBlur = (evt: React.FocusEvent<HTMLInputElement>, id: string) => {
     if (id === "userNisab" && nisabError) {
       if (evt.target.value === "") {
         setUserNisabEmpty(true);
@@ -227,15 +226,15 @@ const ZakahCalculator = () => {
       }
     }
 
-    if (evt.target.value < 0 || data.some((d) => d.value < 0)) {
+    if (Number(evt.target.value) < 0 || data.some((d) => Number(d.value) < 0)) {
       setIsNegative(true);
     } else {
       setIsNegative(false);
     }
 
     if (
-      evt.target.value >= 1000000000 ||
-      data.some((d) => d.value >= 1000000000)
+      Number(evt.target.value) >= 1000000000 ||
+      data.some((d) => Number(d.value) >= 1000000000)
     ) {
       setIsAboveMax(true);
     } else {

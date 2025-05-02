@@ -1,3 +1,4 @@
+import { Ref } from "react";
 import styles from "./ZakahCalculator.module.css";
 
 const Input = ({
@@ -10,16 +11,15 @@ const Input = ({
   userNisabEmpty,
   value,
 }: {
-  activeElement: string;
   disabled: boolean;
   id: string;
-  inputRef: HTMLInputElement;
+  inputRef: Ref<HTMLInputElement>;
   isNegative: boolean;
-  label: string;
-  onBlur: Function;
-  onChange: Function;
+  label: React.ReactNode;
+  onBlur: (evt: React.FocusEvent<HTMLInputElement>, id: string) => void;
+  onChange: (id: string, value: number) => void;
   userNisabEmpty: boolean;
-  value: string;
+  value: number | null;
 }) => {
   return (
     <>
@@ -32,11 +32,11 @@ const Input = ({
         disabled={disabled}
         id={id}
         ref={inputRef}
-        onBlur={onBlur}
-        onChange={onChange}
+        onBlur={(evt) => onBlur(evt, id)}
+        onChange={() => onChange(id, Number(value))}
         role="textbox"
         type="number"
-        value={value}
+        value={value ?? ""}
       />
       {userNisabEmpty && id === "userNisab" ? (
         <span className={styles.helpTip}>Nisab value is required</span>
