@@ -18,9 +18,9 @@ const Totals = ({
   userNisabEmpty: boolean;
 }) => {
   const renderZakahDue = (
-    isAboveMax: any,
-    isNegative: any,
-    userNisabEmpty: any
+    isAboveMax: boolean,
+    isNegative: boolean,
+    userNisabEmpty: boolean
   ) => {
     if (isAboveMax || isNegative || userNisabEmpty) {
       return <span className={styles.error}>see form errors</span>;

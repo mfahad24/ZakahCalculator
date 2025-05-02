@@ -216,8 +216,10 @@ const ZakahCalculator = () => {
       prevData.map((item: Data) => (item.id === id ? { ...item, value } : item))
     );
   };
-  
+
   const onBlur = (evt: React.FocusEvent<HTMLInputElement>, id: string) => {
+    console.log(Number(evt?.target.value));
+    console.log(evt.target.value);
     if (id === "userNisab" && nisabError) {
       if (evt.target.value === "") {
         setUserNisabEmpty(true);
@@ -225,6 +227,11 @@ const ZakahCalculator = () => {
         setUserNisabEmpty(false);
       }
     }
+
+    console.log(
+      "some? ",
+      data.some((d) => Number(d.value) < 0)
+    );
 
     if (Number(evt.target.value) < 0 || data.some((d) => Number(d.value) < 0)) {
       setIsNegative(true);

@@ -39,10 +39,10 @@ const Inputs = ({
         }
         onChange={(evt) =>
           //@ts-ignore
-          onChange(evt?.target?.id, Number(evt?.target?.value))
+          onChange(evt?.target?.id, evt?.target?.value)
         }
         userNisabEmpty={userNisabEmpty}
-        value={!loadingGoldValue ? Number(field.value) : null}
+        value={field.value}
         onBlur={(evt) => onBlur(evt, field.id)}
       />
     );

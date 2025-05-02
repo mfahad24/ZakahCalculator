@@ -33,10 +33,11 @@ const Input = ({
         id={id}
         ref={inputRef}
         onBlur={(evt) => onBlur(evt, id)}
-        onChange={() => onChange(id, Number(value))}
+        onChange={() => onChange(id, value)}
         role="textbox"
         type="number"
-        value={value ?? ""}
+        //@ts-ignore
+        value={value}
       />
       {userNisabEmpty && id === "userNisab" ? (
         <span className={styles.helpTip}>Nisab value is required</span>

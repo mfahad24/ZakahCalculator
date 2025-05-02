@@ -276,6 +276,7 @@ test("should render error message if negative number is entered", async () => {
   const input = screen.getByTestId("loans");
   await userEvent.type(input, "-1");
   await userEvent.tab();
+  await userEvent.tab();
   await waitFor(() => {
     expect(
       screen.getByText("Please enter a number greater than or equal to 0")
@@ -300,7 +301,7 @@ test("should render nisab value required message", async () => {
 
   const input = screen.getByTestId("userNisab");
   await userEvent.type(input, "");
-  await userEvent.tab();
+  await userEvent.tab(); //tabbing twice to make sure the error is persistent
   await waitFor(() => {
     expect(screen.getByText("Nisab value is required")).toBeInTheDocument();
   });
@@ -313,6 +314,7 @@ test("should render error message if number entered is $1,000,000,000 or greater
   const input = screen.getByTestId("loans");
   await userEvent.type(input, "1000000000");
   await userEvent.tab();
+  await userEvent.tab(); //tabbing twice to make sure the error is persistent
   await waitFor(() => {
     expect(
       screen.getByText("Please enter a value below $1,000,000,000")
