@@ -9,12 +9,10 @@ import Totals from "./Totals";
 import styles from "./ZakahCalculator.module.css";
 
 /*
-- tests
 - create excel sheet for all locale text
 - readme
 - add google analytics + SEO
 */
-
 export type Data = {
   id: string;
   label: React.ReactNode;
