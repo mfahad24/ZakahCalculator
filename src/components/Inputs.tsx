@@ -37,9 +37,9 @@ const Inputs = ({
             field.label
           )
         }
-        onChange={(evt) =>
-          //@ts-ignore
-          onChange(evt?.target?.id, evt?.target?.value)
+        //@ts-ignore
+        onChange={(evt: { target: { id: any; value: any } }) =>
+          onChange(evt.target.id, Number(evt.target.value))
         }
         userNisabEmpty={userNisabEmpty}
         value={field.value}

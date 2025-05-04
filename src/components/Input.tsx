@@ -33,7 +33,8 @@ const Input = ({
         id={id}
         ref={inputRef}
         onBlur={(evt) => onBlur(evt, id)}
-        onChange={() => onChange(id, value)}
+        //@ts-ignore
+        onChange={onChange}
         role="textbox"
         type="number"
         //@ts-ignore
