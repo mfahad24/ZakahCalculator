@@ -123,6 +123,41 @@ a:visited {
 .disclosure {
 font-weight: bold; 
 font-size: 14px; 
+margin-top: 5px; 
+}
+
+.symbol {
+  position: relative; 
+}
+
+.symbol::before {
+  content: "$";
+  position: absolute;
+  left: 5px;
+  top: 45%;
+  transform: translateY(-50%);
+  color: #333;
+  pointer-events: none;
+}
+
+.symbol input {
+  padding-left: 15px; 
+}
+
+.right > .symbol:last-of-type {
+  margin-bottom: 5px; 
+}
+
+input[type="number"] {
+  width: 95%;
+  padding: 5px 5px 5px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+input[type="number"]:focus {
+  border-color: #80bdff;
+  outline: none;
 }
 
 /* Tablet styles */
@@ -162,7 +197,7 @@ font-size: 14px;
   }
 
   .amount {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .totals {
@@ -200,6 +235,6 @@ font-size: 14px;
   }
 
   .amount .error {
-    font-size: 13px; 
+    font-size: 14px; 
   }
 }

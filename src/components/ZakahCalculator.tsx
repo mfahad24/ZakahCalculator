@@ -12,7 +12,18 @@ import styles from "./ZakahCalculator.module.css";
 - create excel sheet for all locale text
 - readme
 - add google analytics + SEO
+- add multi currency options
+- add multi language options
+- add info buttons where necessary
+- mobile totals --> bottom
+- fix input fields on mobile
+- update font, add more colors, make header more prominent 
+- improve browser compatability 
+- update #4 language (consider 24k gold)
+- add nisab with silver 
+- differentiate user nisab value field from others
 */
+
 export type Data = {
   id: string;
   label: React.ReactNode;
@@ -210,6 +221,7 @@ const ZakahCalculator = () => {
   }, [nisabError]);
 
   const onChange = (id: string, value: number): void => {
+    console.log(value, typeof value);
     setData((prevData) =>
       prevData.map((item: Data) => (item.id === id ? { ...item, value } : item))
     );
