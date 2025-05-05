@@ -3,7 +3,7 @@
   flex-direction: row;
   margin: 0;
   padding: 0;
-  height: 100%; 
+  /* height: 100vh */
 }
 
 .left,
@@ -15,9 +15,9 @@
   width: 25%;
   line-height: 2;
   background-color: #f0f8ff;
-  border-left: 5px solid #0077cc;
+  /* border-left: 5px solid #0077cc; */
   color: #2a2a2a;
-  /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px; */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
 .right {
@@ -48,6 +48,7 @@
 .description {
   font-size: 15px;
   margin-block-start: 0;
+  font-style: italic;
 }
 
 .amount {
@@ -113,7 +114,7 @@
   color: red;
   font-size: 15px;
   font-weight: bold;
-  margin: 5px 0px;
+  margin: 15px 0px;
 }
 
 a:visited {
@@ -164,12 +165,47 @@ input, textarea, select {
   font-size: 16px;
 }
 
+.nav {
+  width: 100%; 
+  display: flex; 
+  justify-content: space-between;
+  background-color: #004085 ;
+  height: 50px; 
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.leftNav > , .rightNav {
+  margin: 0px 10px; 
+}
+
+.nav .link {
+  text-decoration: none;
+  font-size: 18px; 
+  color: white; 
+  margin: 0px 15px; 
+  /* padding: 0px 10px;  */
+}
+
+.active {
+  border-bottom: 4px solid white; 
+}
+
 /* Tablet styles */
 @media (min-width: 768px) and (max-width: 1023px) {
   .left {
     line-height: 1.5;
     padding: 25px;
     width: 35%; 
+  }
+
+  .nav .link {
+    font-size: 15px;
+    
+  }
+
+  .active {
+    border-bottom: 3px solid white; 
   }
 
   .header {
@@ -198,6 +234,7 @@ input, textarea, select {
 
   .left {
     line-height: 1;
+      border-left: 5px solid #0077cc;
   }
 
   .amount {
@@ -239,14 +276,25 @@ input, textarea, select {
   }
 
   .header {
-    margin-bottom: 15px; 
+    margin-bottom: 14px; 
   }
 
   .amount .error {
     font-size: 14px; 
   }
 
+
+
+  .nav {
+    width: 15%; 
+    height: 100%; 
+    flex-direction: column;
+    display: none; 
+    /* TEMP */
+  }
+
   /* .root {
     height: 100%; 
   } */
+
 }

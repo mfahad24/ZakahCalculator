@@ -1,9 +1,24 @@
+import Nisab from "./Nisab";
+
 import styles from "./ZakahCalculator.module.css";
 
-const Header = () => {
+const Header = ({
+  loadingGoldValue,
+  nisabError,
+  nisabValue,
+}: {
+  loadingGoldValue: boolean;
+  nisabError: React.ReactNode | string;
+  nisabValue: number | null;
+}) => {
   return (
     <>
       <h1 className={styles.header}>Zakah Calculator</h1>
+      <Nisab
+        loadingGoldValue={loadingGoldValue}
+        nisabError={nisabError}
+        nisabValue={nisabValue}
+      />
       <p className={styles.description}>
         Your zakah due is calculated at 2.5% of your total amount only if your
         total amount is equal to or above the nisab. Nisab is the price of gold

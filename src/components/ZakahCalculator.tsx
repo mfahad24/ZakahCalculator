@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 
 import Inputs from "./Inputs.js";
 import Header from "./Header";
+import Menu from "./Menu.js";
 import Nisab from "./Nisab";
 import Totals from "./Totals";
 
@@ -252,9 +253,16 @@ const ZakahCalculator = () => {
 
   return (
     <>
+      {/* <div className={styles.menu}> */}
+      <Menu />
+      {/* </div> */}
       <div className={styles.root}>
         <div className={styles.left}>
-          <Header />
+          <Header
+            loadingGoldValue={loadingGoldValue}
+            nisabError={nisabError}
+            nisabValue={nisabValue}
+          />
           <Totals
             data={data}
             nisabValue={nisabValue}
@@ -264,11 +272,6 @@ const ZakahCalculator = () => {
           />
         </div>
         <div className={styles.right}>
-          <Nisab
-            loadingGoldValue={loadingGoldValue}
-            nisabError={nisabError}
-            nisabValue={nisabValue}
-          />
           {isNegative ? (
             <p className={styles.error}>
               Please enter a number greater than or equal to 0

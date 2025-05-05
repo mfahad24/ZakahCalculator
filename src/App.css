@@ -2,3 +2,14 @@
   font-family: monospace;
 }
 
+
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  #root {
+    display: flex;
+    flex-direction: row;
+    /* width: 10%;  */
+    height: 100%; 
+  }
+}
