@@ -36,7 +36,7 @@ const Totals = ({
     <>
       <div className={styles.totals}>
         <div className={styles.amount}>
-          <label>Total Eligible For Zakah</label>
+          <label>Eligible For Zakah</label>
           <span>${formatCurrency(inputTotal(data))}</span>
         </div>
         <div className={styles.amount}>

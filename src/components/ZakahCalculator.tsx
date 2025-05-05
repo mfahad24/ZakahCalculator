@@ -15,9 +15,6 @@ import styles from "./ZakahCalculator.module.css";
 - add multi currency options
 - add multi language options
 - add info buttons where necessary
-- mobile totals --> bottom
-- fix input fields on mobile
-- update font, add more colors, make header more prominent 
 - improve browser compatability 
 - update #4 language (consider 24k gold)
 - add nisab with silver 

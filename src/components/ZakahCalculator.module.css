@@ -14,10 +14,9 @@
 .left {
   width: 40%;
   line-height: 2;
-  border-radius: 5px;
-  background-color: lightgrey;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
+  background-color: #f0f8ff;
+  border-left: 5px solid #0077cc;
+  color: #2a2a2a;
 }
 
 .right {
@@ -113,7 +112,7 @@
   color: red;
   font-size: 15px;
   font-weight: bold;
-  margin-top: 5px;
+  margin: 5px 0px;
 }
 
 a:visited {
@@ -188,12 +187,11 @@ input[type="number"]:focus {
   .right {
     display: flex;
     flex-direction: column;
+    margin-bottom: 70px; 
   }
 
   .left {
     line-height: 1;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
   }
 
   .amount {
@@ -202,11 +200,14 @@ input[type="number"]:focus {
 
   .totals {
     position: fixed;
-    top: 0px;
+    bottom: 0px;
     left: 0px;
     width: 100%;
     background-color: whitesmoke;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+        z-index: 10; 
+        background: #004085;
+    color: white;
   }
 
   .amount {
@@ -214,11 +215,11 @@ input[type="number"]:focus {
     margin-bottom: 10px;
     margin-top: 10px;
     text-align: center;
-    padding: 0px 20px;
+    padding: 0px 10px;
   }
 
   .header {
-    margin-top: 70px;
+    margin-top: 10px;
     font-size: 20px;
   }
 
