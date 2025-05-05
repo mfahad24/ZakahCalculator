@@ -19,6 +19,7 @@ import styles from "./ZakahCalculator.module.css";
 - update #4 language (consider 24k gold)
 - add nisab with silver 
 - differentiate user nisab value field from others
+- add nav / router (beginnings of full fledged user profile/dashboard)
 */
 
 export type Data = {

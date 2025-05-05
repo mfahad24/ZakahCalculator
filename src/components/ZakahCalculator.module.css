@@ -160,6 +160,10 @@ input[type="number"]:focus {
   outline: none;
 }
 
+input, textarea, select {
+  font-size: 16px;
+}
+
 /* Tablet styles */
 @media (min-width: 768px) and (max-width: 1023px) {
   .left {
@@ -189,7 +193,7 @@ input[type="number"]:focus {
   .right {
     display: flex;
     flex-direction: column;
-    margin-bottom: 70px; 
+    margin-bottom: 80px; 
   }
 
   .left {
