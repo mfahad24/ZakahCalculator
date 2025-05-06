@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
-import Dashboard from "./components/Dashboard/Dashboard";
-import Menu from "./components/ZakahCalculator/Menu";
-import ZakahCalculator from "./components/ZakahCalculator/ZakahCalculator";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Menu from "./pages/ZakahCalculator/Menu";
+import ZakahCalculator from "./pages/ZakahCalculator/ZakahCalculator";
 
 import "./App.css";
 

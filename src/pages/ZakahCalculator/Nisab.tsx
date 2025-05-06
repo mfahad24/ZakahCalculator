@@ -1,3 +1,5 @@
+import HelpTip from "../../components/HelpTip/HelpTip";
+
 import { IoInformationCircleOutline } from "react-icons/io5";
 
 import { renderIcon } from "../../util/util";
@@ -41,6 +43,7 @@ const Nisab = ({
         {!loadingGoldValue && !nisabError
           ? renderIcon(IoInformationCircleOutline, 18, "black")
           : null}
+        <HelpTip />
       </strong>
     </p>
   );

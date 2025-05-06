@@ -1,4 +1,4 @@
-import { Data } from "../components/ZakahCalculator/ZakahCalculator";
+import { Data } from "../pages/ZakahCalculator/ZakahCalculator";
 
 export const inputTotal = (data: Data[]) => {
   const total = data.reduce((accumulator: number, currentValue: Data) => {
