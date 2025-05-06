@@ -1,27 +1,14 @@
 import { IoLogInOutline } from "react-icons/io5";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
+import { renderIcon } from "../util/util";
+
 import styles from "./ZakahCalculator.module.css";
 
 const Menu = () => {
   const isOpen = true;
   const isActive = true;
-
-  const renderIcon = (
-    Icon: React.ComponentType<{
-      size?: number;
-      color?: string;
-      style?: React.CSSProperties;
-    }>
-  ) => {
-    return (
-      <Icon
-        size={20}
-        color="white"
-        style={{ position: "relative", top: "4px", left: "3px" }}
-      />
-    );
-  };
+  const userName = "mfahad24";
 
   return (
     <nav className={styles.nav}>
@@ -39,7 +26,7 @@ const Menu = () => {
 
       <div className={styles.rightNav}>
         <a href="#user" className={styles.link}>
-          Welcome, mfahad24!
+          Welcome, {userName}!
         </a>
         <a href="#language" className={styles.link}>
           English

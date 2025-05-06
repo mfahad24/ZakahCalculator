@@ -1,3 +1,7 @@
+import { IoInformationCircleOutline } from "react-icons/io5";
+
+import { renderIcon } from "../util/util";
+
 import styles from "./ZakahCalculator.module.css";
 
 const Nisab = ({
@@ -26,7 +30,7 @@ const Nisab = ({
       } else {
         return `Current nisab value: ${nisabValue ? "$" : ""}${Number(
           nisabValue
-        )?.toFixed(2)}*`;
+        )?.toFixed(2)}`;
       }
     }
   };
@@ -34,6 +38,9 @@ const Nisab = ({
     <p>
       <strong className={styles.nisabValue}>
         {renderNisabMessage(loadingGoldValue, nisabValue, nisabError)}
+        {!loadingGoldValue && !nisabError
+          ? renderIcon(IoInformationCircleOutline, 18, "black")
+          : null}
       </strong>
     </p>
   );

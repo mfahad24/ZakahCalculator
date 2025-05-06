@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 import Inputs from "./Inputs.js";
 import Header from "./Header";
 import Menu from "./Menu.js";
-import Nisab from "./Nisab";
 import Totals from "./Totals";
 
 import styles from "./ZakahCalculator.module.css";

@@ -28,3 +28,21 @@ export const formatCurrency = (value: number) => {
     maximumFractionDigits: 2,
   });
 };
+
+export const renderIcon = (
+  Icon: React.ComponentType<{
+    size?: number;
+    color?: string;
+    style?: React.CSSProperties;
+  }>,
+  size?: number,
+  color?: string
+) => {
+  return (
+    <Icon
+      size={size}
+      color={color}
+      style={{ position: "relative", top: "4px", left: "3px" }}
+    />
+  );
+};
