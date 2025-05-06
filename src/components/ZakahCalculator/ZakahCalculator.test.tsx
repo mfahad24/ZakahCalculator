@@ -19,7 +19,7 @@ const pension =
   "6. Net value of IRA, 401K, pension funds if liquidated as of the zakat payment date (adjusted for taxes and penalties, if applicable)";
 const business = "7. Net value of business inventory and trade goods";
 const realEstate = "8. Equity in investment real estate";
-const totalEligibleForZakah = "Total Eligible For Zakah";
+const totalEligibleForZakah = "Eligible For Zakah";
 const yourZakahDue = "Your Zakah Due";
 
 vi.mock("js-cookie", () => ({
@@ -82,7 +82,7 @@ test("renders nisab text and value", () => {
   Cookies.get.mockReturnValue("1300");
   render(<ZakahCalculator />);
 
-  const nisab = screen.getByText("Current nisab value: $1300.00*");
+  const nisab = screen.getByText("Current nisab value: $1300.00");
   expect(nisab).toBeInTheDocument();
 });
 
@@ -107,7 +107,7 @@ test("gets value from DB if there is cookie value is null", async () => {
   render(<ZakahCalculator />);
 
   await waitFor(() => {
-    const nisab = screen.getByText("Current nisab value: $1400.00*");
+    const nisab = screen.getByText("Current nisab value: $1400.00");
     expect(nisab).toBeInTheDocument();
   });
 });
@@ -125,7 +125,7 @@ test("gets value from DB if there is cookie value is undefined", async () => {
   render(<ZakahCalculator />);
 
   await waitFor(() => {
-    const nisab = screen.getByText("Current nisab value: $1500.00*");
+    const nisab = screen.getByText("Current nisab value: $1500.00");
     expect(nisab).toBeInTheDocument();
   });
 });
@@ -191,7 +191,7 @@ test("should get value from gold API if no cookies and db value is expired", asy
   render(<ZakahCalculator />);
 
   await waitFor(() => {
-    const nisab = screen.getByText("Current nisab value: $9691.65*");
+    const nisab = screen.getByText("Current nisab value: $9691.65");
     expect(nisab).toBeInTheDocument();
   });
 });
