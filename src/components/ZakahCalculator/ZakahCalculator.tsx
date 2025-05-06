@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 
-import Inputs from "./Inputs.js";
-import Header from "./Header";
-import Menu from "./Menu.js";
-import Totals from "./Totals";
+import Inputs from "./Inputs.tsx";
+import Header from "./Header.tsx";
+import Totals from "./Totals.tsx";
 
 import styles from "./ZakahCalculator.module.css";
 
@@ -252,9 +251,6 @@ const ZakahCalculator = () => {
 
   return (
     <>
-      {/* <div className={styles.menu}> */}
-      <Menu />
-      {/* </div> */}
       <div className={styles.root}>
         <div className={styles.left}>
           <Header

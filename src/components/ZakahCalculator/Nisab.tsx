@@ -1,6 +1,6 @@
 import { IoInformationCircleOutline } from "react-icons/io5";
 
-import { renderIcon } from "../util/util";
+import { renderIcon } from "../../util/util";
 
 import styles from "./ZakahCalculator.module.css";
 

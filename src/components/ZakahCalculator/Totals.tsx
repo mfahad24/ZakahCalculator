@@ -1,4 +1,4 @@
-import { inputTotal, zakahDue, formatCurrency } from "../util/util.js";
+import { inputTotal, zakahDue, formatCurrency } from "../../util/util.js";
 
 import { Data } from "./ZakahCalculator.js";
 

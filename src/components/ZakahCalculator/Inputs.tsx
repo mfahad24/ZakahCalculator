@@ -1,7 +1,7 @@
 import { Ref } from "react";
-import Input from "./Input.js";
+import Input from "./Input";
 
-import { Data } from "./ZakahCalculator.js";
+import { Data } from "./ZakahCalculator";
 
 const Inputs = ({
   data,

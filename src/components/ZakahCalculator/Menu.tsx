@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 import { IoLogInOutline } from "react-icons/io5";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-import { renderIcon } from "../util/util";
+import { renderIcon } from "../../util/util";
 
 import styles from "./ZakahCalculator.module.css";
 
@@ -13,15 +15,15 @@ const Menu = () => {
   return (
     <nav className={styles.nav}>
       <div className={styles.leftNav}>
-        <a href="#dashboard" className={styles.link}>
+        <Link to="/" className={styles.link}>
           Dashboard
-        </a>
-        <a
-          href="#zakahcalculator"
+        </Link>
+        <Link
+          to="/zakah-calculator"
           className={`${styles.link} ${isActive && styles.active}`}
         >
           Zakah Calculator
-        </a>
+        </Link>
       </div>
 
       <div className={styles.rightNav}>
