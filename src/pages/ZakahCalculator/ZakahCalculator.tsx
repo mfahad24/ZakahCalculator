@@ -19,6 +19,10 @@ import styles from "./ZakahCalculator.module.css";
 - add nisab with silver 
 - differentiate user nisab value field from others
 - add nav / router (beginnings of full fledged user profile/dashboard)
+- context?
+- react useQuery?
+- react hook forms? 
+- move out API calls and simplify zakah calc comp
 */
 
 export type Data = {
@@ -287,9 +291,6 @@ const ZakahCalculator = () => {
             onBlur={onBlur}
             userNisabEmpty={userNisabEmpty}
           />
-          {!nisabError && (
-            <span className={styles.disclosure}>*updates every 24 hours</span>
-          )}
         </div>
       </div>
     </>

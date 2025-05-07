@@ -1,9 +1,9 @@
+import Icon from "../../components/Icon/Icon";
+
 import { Link } from "react-router-dom";
 
 import { IoLogInOutline } from "react-icons/io5";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-
-import { renderIcon } from "../../util/util";
 
 import styles from "./ZakahCalculator.module.css";
 
@@ -32,16 +32,16 @@ const Menu = () => {
         </a>
         <a href="#language" className={styles.link}>
           English
-          {isOpen ? renderIcon(IoIosArrowDown) : renderIcon(IoIosArrowUp)}
+          {isOpen ? Icon(IoIosArrowDown) : Icon(IoIosArrowUp)}
         </a>
         <a href="#currency" className={styles.link}>
           USD
-          {isOpen ? renderIcon(IoIosArrowDown) : renderIcon(IoIosArrowUp)}
+          {isOpen ? Icon(IoIosArrowDown) : Icon(IoIosArrowUp)}
         </a>
 
         <a href="#logout" className={styles.link}>
           Logout
-          {renderIcon(IoLogInOutline)}
+          {Icon(IoLogInOutline)}
         </a>
       </div>
     </nav>

@@ -1,5 +1,7 @@
 import Nisab from "./Nisab";
 
+import { useWindowWidth } from "../../util/util";
+
 import styles from "./ZakahCalculator.module.css";
 
 const Header = ({
@@ -42,6 +44,10 @@ const Header = ({
         </a>{" "}
         <a href="tel:+9162396233">(916)239–6233</a>.
       </p>
+      {!nisabError && (
+        <p className={styles.disclosure}>*updates every 24 hours</p>
+      )}
+      {useWindowWidth() > 768 && <hr />}
     </>
   );
 };

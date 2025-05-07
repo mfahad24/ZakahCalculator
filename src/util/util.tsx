@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import { Data } from "../pages/ZakahCalculator/ZakahCalculator";
 
 export const inputTotal = (data: Data[]) => {
@@ -29,20 +31,15 @@ export const formatCurrency = (value: number) => {
   });
 };
 
-export const renderIcon = (
-  Icon: React.ComponentType<{
-    size?: number;
-    color?: string;
-    style?: React.CSSProperties;
-  }>,
-  size?: number,
-  color?: string
-) => {
-  return (
-    <Icon
-      size={size}
-      color={color}
-      style={{ position: "relative", top: "4px", left: "3px" }}
-    />
-  );
-};
+export function useWindowWidth() {
+  const [windowWidth, setWindowWidth] = useState(() => window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowWidth;
+}

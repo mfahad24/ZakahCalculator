@@ -3,7 +3,7 @@
   flex-direction: row;
   margin: 0;
   padding: 0;
-  height: 100vh
+  height: 100vh;
 }
 
 .left,
@@ -13,11 +13,11 @@
 
 .left {
   width: 25%;
-  line-height: 2;
+  line-height: 1.5;
   background-color: #f0f8ff;
-  /* border-left: 5px solid #0077cc; */
   color: #2a2a2a;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
 .right {
@@ -33,7 +33,7 @@
 }
 
 .label {
-  font-size: 15px; 
+  font-size: 15px;
 }
 
 .label > p {
@@ -99,7 +99,7 @@
   color: red;
   margin-top: 0px;
   font-weight: bold;
-  font-size: 14px; 
+  font-size: 14px;
 }
 
 .right > input:first-of-type {
@@ -122,13 +122,12 @@ a:visited {
 }
 
 .disclosure {
-font-weight: bold; 
-font-size: 14px; 
-margin-top: 5px; 
+  font-weight: bold;
+  font-size: 12px;
 }
 
 .symbol {
-  position: relative; 
+  position: relative;
 }
 
 .symbol::before {
@@ -142,11 +141,11 @@ margin-top: 5px;
 }
 
 .symbol input {
-  padding-left: 15px; 
+  padding-left: 15px;
 }
 
 .right > .symbol:last-of-type {
-  margin-bottom: 5px; 
+  margin-bottom: 5px;
 }
 
 input[type="number"] {
@@ -161,39 +160,47 @@ input[type="number"]:focus {
   outline: none;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   font-size: 16px;
 }
 
 .nav {
-  width: 100%; 
-  display: flex; 
+  width: 100%;
+  display: flex;
   justify-content: space-between;
-  background-color: #004085 ;
-  height: 50px; 
+  background-color: #004085;
+  height: 50px;
   align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
-
 
 .leftNav {
   margin-left: 20px;
 }
 
 .rightNav {
-  margin-right: 20px; 
+  margin-right: 20px;
 }
 
 .nav .link {
   text-decoration: none;
-  font-size: 18px; 
-  color: white; 
-  margin: 0px 15px; 
-  /* padding: 0px 10px;  */
+  font-size: 18px;
+  color: white;
+  margin: 0px 15px;
 }
 
 .active {
-  border-bottom: 4px solid white; 
+  border-bottom: 4px solid white;
+}
+
+hr {
+  margin-bottom: 10px;
+  background-color: #ccc;
+  height: 2px;
+  border: none;
 }
 
 /* Tablet styles */
@@ -201,16 +208,15 @@ input, textarea, select {
   .left {
     line-height: 1.5;
     padding: 25px;
-    width: 35%; 
+    width: 35%;
   }
 
   .nav .link {
     font-size: 15px;
-    
   }
 
   .active {
-    border-bottom: 3px solid white; 
+    border-bottom: 3px solid white;
   }
 
   .header {
@@ -221,9 +227,9 @@ input, textarea, select {
   .leftNav {
     margin-left: 0px;
   }
-  
+
   .rightNav {
-    margin-right: 0px; 
+    margin-right: 0px;
   }
 }
 
@@ -242,12 +248,12 @@ input, textarea, select {
   .right {
     display: flex;
     flex-direction: column;
-    margin-bottom: 80px; 
+    margin-bottom: 80px;
   }
 
   .left {
     line-height: 1;
-      border-left: 5px solid #0077cc;
+    border-left: 5px solid #0077cc;
   }
 
   .amount {
@@ -260,9 +266,10 @@ input, textarea, select {
     left: 0px;
     width: 100%;
     background-color: whitesmoke;
-    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
-        z-index: 10; 
-        background: #004085;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset,
+      rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+    z-index: 10;
+    background: #004085;
     color: white;
   }
 
@@ -275,7 +282,6 @@ input, textarea, select {
   }
 
   .header {
-    
     margin-top: 10px;
     font-size: 20px;
   }
@@ -289,25 +295,22 @@ input, textarea, select {
   }
 
   .header {
-    margin-bottom: 14px; 
+    margin-bottom: 14px;
   }
 
   .amount .error {
-    font-size: 14px; 
+    font-size: 14px;
   }
 
-
-
   .nav {
-    width: 15%; 
-    height: 100%; 
+    width: 15%;
+    height: 100%;
     flex-direction: column;
-    display: none; 
+    display: none;
     /* TEMP */
   }
 
   .root {
-    height: 100%; 
+    height: 100%;
   }
-
 }
