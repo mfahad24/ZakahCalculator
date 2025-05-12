@@ -58,14 +58,6 @@ const Header = ({
           styles.rightAlign
         )}`}
       >
-        {/* Should you have any questions about Zakah please contact the{" "}
-        <a
-          href="https://www.amjaonline.org/fatwa/en/79978/Zakah"
-          target="_blank"
-        >
-          Assembly of Muslim Jurists of America (AMJA)
-        </a>{" "}
-        <a href="tel:+9162396233">(916)239–6233</a>. */}
         <Trans
           //Trans doesnt translate "keyPrefix"
           i18nKey="Header.descriptionThree"

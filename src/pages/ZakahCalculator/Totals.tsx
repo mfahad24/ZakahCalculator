@@ -24,7 +24,7 @@ const Totals = ({
     userNisabEmpty: boolean
   ) => {
     if (isAboveMax || isNegative || userNisabEmpty) {
-      return <span className={styles.error}>see form errors</span>;
+      return <span className={styles.error}>{t("seeFormErrors")}</span>;
     } else {
       return (
         `$` +

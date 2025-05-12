@@ -1,4 +1,5 @@
 import { Ref } from "react";
+import { getArabicRightStyle } from "../../util/util";
 import styles from "./ZakahCalculator.module.css";
 
 const Input = ({
@@ -23,12 +24,17 @@ const Input = ({
 }) => {
   return (
     <>
-      <label className={styles.label} htmlFor={id}>
+      <label
+        className={`${styles.label} ${getArabicRightStyle(styles.rightAlign)}`}
+        htmlFor={id}
+      >
         {label}
       </label>
       <div className={styles.symbol}>
         <input
-          className={styles.input}
+          className={`${styles.input} ${getArabicRightStyle(
+            styles.rightAlign
+          )}`}
           data-testid={id}
           disabled={disabled}
           id={id}

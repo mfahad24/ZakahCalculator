@@ -3,6 +3,8 @@ import Cookies from "js-cookie";
 
 import { useTranslation } from "react-i18next";
 
+import { getArabicRightStyle } from "../../util/util.tsx";
+
 import Inputs from "./Inputs.tsx";
 import Header from "./Header.tsx";
 import Totals from "./Totals.tsx";
@@ -239,6 +241,8 @@ const ZakahCalculator = () => {
     }
   };
 
+  const errorRightAlign = getArabicRightStyle(styles.rightAlign);
+
   return (
     <>
       <div className={styles.root}>
@@ -257,16 +261,24 @@ const ZakahCalculator = () => {
           />
         </div>
         <div className={styles.right}>
-          {isNegative ? (
-            <p className={styles.error}>
-              Please enter a number greater than or equal to 0
+          {isNegative && (
+            <p
+              className={`${styles.error} ${
+                errorRightAlign ? errorRightAlign : ""
+              }`}
+            >
+              {t("noNegativeValues")}
             </p>
-          ) : null}
-          {isAboveMax ? (
-            <p className={styles.error}>
-              Please enter a value below $1,000,000,000
+          )}
+          {isAboveMax && (
+            <p
+              className={`${styles.error} ${
+                errorRightAlign ? errorRightAlign : ""
+              }`}
+            >
+              {t("noValueAboveOneBillion")}
             </p>
-          ) : null}
+          )}
           <Inputs
             data={data}
             inputRef={inputRef}

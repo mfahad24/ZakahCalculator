@@ -14,19 +14,25 @@ const resources = {
           "Your zakah due is calculated at 2.5% of your total amount only if your total amount is equal to or above the nisab. Nisab is the price of gold per ounce x 3",
         descriptionTwo:
           "If you have a <linkOne>nisab value from a different date</linkOne> or have your own nisab value from a different source, enter it on line 1.",
-        descriptionThree: "Should you have any questions about Zakah please contact the <linkOne>Assembly of Muslim Jurists of America (AMJA)</linkOne><linkTwo>(916)239–6233</linkTwo>",
+        descriptionThree:
+          "Should you have any questions about Zakah please contact the <linkOne>Assembly of Muslim Jurists of America (AMJA)</linkOne><linkTwo>(916)239–6233</linkTwo>",
         updateDisclosure: "*updates every 24 hours",
-        eligibleForZakah: "Eligible For Zakah", 
+        eligibleForZakah: "Eligible For Zakah",
         yourZakahDue: "Your Zakah Due",
         userNisab_optional: "1. Enter your own nisab value (optional)",
         userNisab_required: "1. Enter your own nisab value (required)",
-        cashOnHand: "2. Cash on hand and in back accounts (savings, checking, etc)",
+        cashOnHand:
+          "2. Cash on hand and in back accounts (savings, checking, etc)",
         loans: "3. Non-delinquent loans (money you loaned to others)",
         gold: "4. Value of gold, silver and precious items",
         stocks: "5. Value of shares and stocks",
-        "401k": "6. Net value of IRA, 401K, pension funds if liquidated as of the zakat payment date (adjusted for taxes and penalties, if applicable)",
+        "401k":
+          "6. Net value of IRA, 401K, pension funds if liquidated as of the zakat payment date (adjusted for taxes and penalties, if applicable)",
         business: "7. Net value of business inventory and trade goods",
-        realEstate: "8. Equity in investment real estate"
+        realEstate: "8. Equity in investment real estate",
+        noNegativeValues: "Please enter a number greater than or equal to 0",
+        noValueAboveOneBillion: "Please enter a value below $1,000,000,000",
+        seeFormErrors: "see form errors",
       },
     },
   },
@@ -42,19 +48,25 @@ const resources = {
           "تُحسب زكاتك بنسبة ٢.٥٪ من إجمالي المبلغ فقط إذا كان المبلغ الإجمالي يساوي أو يزيد عن النصاب. النصاب هو سعر أوقية الذهب × ٣",
         descriptionTwo:
           "إذا كانت لديك <linkOne>قيمة نصاب من تاريخ مختلف</linkOne> أو من مصدر مختلف، أدخلها في السطر 1.",
-        descriptionThree: "إذا كانت لديك أي أسئلة حول الزكاة، يرجى التواصل مع <linkOne>جمعية الفقهاء المسلمين في أمريكا (AMJA)</linkOne><linkTwo>(916)239–6233</linkTwo>",
+        descriptionThree:
+          "إذا كانت لديك أي أسئلة حول الزكاة، يرجى التواصل مع <linkOne>جمعية الفقهاء المسلمين في أمريكا (AMJA)</linkOne><linkTwo>(916)239–6233</linkTwo>",
         updateDisclosure: "تحديثات كل 24 ساعة*",
         eligibleForZakah: "المستحقون للزكاة",
         yourZakahDue: "واجب الزكاة الخاص بك",
-                userNisab_optional: "1. أدخل قيمة النصاب الخاصة بك (اختياري)",
+        userNisab_optional: "1. أدخل قيمة النصاب الخاصة بك (اختياري)",
         userNisab_required: "1. أدخل قيمة النصاب الخاصة بك (مطلوب)",
-        cashOnHand: "2. النقد في متناول اليد وفي الحسابات الخلفية (التوفير، والحسابات الجارية، وما إلى ذلك)",
+        cashOnHand:
+          "2. النقد في متناول اليد وفي الحسابات الخلفية (التوفير، والحسابات الجارية، وما إلى ذلك)",
         loans: "3. القروض غير المتعثرة (الأموال التي أقرضتها للآخرين)",
         gold: "4. قيمة الذهب والفضة والأشياء الثمينة",
         stocks: "5. قيمة الأسهم والسندات",
-        "401k": "6. القيمة الصافية لصناديق التقاعد (IRA) و(401K) إذا تم تصفيتها في تاريخ دفع الزكاة (بعد تعديلها للضرائب والغرامات، إن وجدت)",
+        "401k":
+          "6. القيمة الصافية لصناديق التقاعد (IRA) و(401K) إذا تم تصفيتها في تاريخ دفع الزكاة (بعد تعديلها للضرائب والغرامات، إن وجدت)",
         business: "7. القيمة الصافية لمخزون الأعمال والسلع التجارية",
-        realEstate: "8. حقوق الملكية في العقارات الاستثمارية"
+        realEstate: "8. حقوق الملكية في العقارات الاستثمارية",
+        noNegativeValues: "الرجاء إدخال رقم أكبر من أو يساوي 0",
+        noValueAboveOneBillion: "الرجاء إدخال قيمة أقل من 1,000,000,000 دولار",
+        seeFormErrors: "انظر أخطاء النموذج",
       },
     },
   },
