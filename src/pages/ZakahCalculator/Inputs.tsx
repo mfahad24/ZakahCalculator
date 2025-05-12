@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Ref } from "react";
 import Input from "./Input";
 
@@ -22,6 +23,8 @@ const Inputs = ({
   onChange: (id: string, value: number) => void;
   userNisabEmpty: boolean;
 }) => {
+  const { t } = useTranslation("translation", { keyPrefix: "Header" });
+
   return data.map((field, index) => {
     return (
       <Input
@@ -32,9 +35,11 @@ const Inputs = ({
         inputRef={field.id === "userNisab" ? inputRef : null}
         label={
           field.id === "userNisab" && nisabError ? (
-            <p>1. Enter your own nisab value (required)</p>
+            <p>{t("userNisab_required")}</p>
           ) : (
-            field.label
+            <p>
+              {field.id === "userNisab" ? t("userNisab_optional") : t(field.id)}
+            </p>
           )
         }
         //@ts-ignore

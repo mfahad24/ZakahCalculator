@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 
+import { useTranslation } from "react-i18next";
+
 import Inputs from "./Inputs.tsx";
 import Header from "./Header.tsx";
 import Totals from "./Totals.tsx";
@@ -23,61 +25,47 @@ import styles from "./ZakahCalculator.module.css";
 - react useQuery?
 - react hook forms? 
 - move out API calls and simplify zakah calc comp
+- use local storage over cookies 
 */
 
 export type Data = {
   id: string;
-  label: React.ReactNode;
   value: number | null;
 };
 
 const ZakahCalculator = () => {
+  const { t } = useTranslation("translation", { keyPrefix: "Header" });
   const [data, setData] = useState<Data[]>([
     {
       id: "userNisab",
-      label: <p>1. Enter your own nisab value (optional)</p>,
       value: null,
     },
     {
       id: "cashOnHand",
-      label: (
-        <p>2. Cash on hand and in back accounts (savings, checking, etc)</p>
-      ),
       value: null,
     },
     {
       id: "loans",
-      label: <p>3. Non-delinquent loans (money you loaned to others)</p>,
       value: null,
     },
     {
       id: "gold",
-      label: <p>4. Value of gold, silver and precious items</p>,
       value: null,
     },
     {
       id: "stocks",
-      label: <p>5. Value of shares and stocks</p>,
       value: null,
     },
     {
       id: "401k",
-      label: (
-        <p>
-          6. Net value of IRA, 401K, pension funds if liquidated as of the zakat
-          payment date (adjusted for taxes and penalties, if applicable)
-        </p>
-      ),
       value: null,
     },
     {
       id: "business",
-      label: <p>7. Net value of business inventory and trade goods</p>,
       value: null,
     },
     {
       id: "realEstate",
-      label: <p>8. Equity in investment real estate</p>,
       value: null,
     },
   ]);
@@ -196,9 +184,7 @@ const ZakahCalculator = () => {
             });
           } catch (error) {
             setNisabError(
-              <span className={styles.error}>
-                Unable to retrieve nisab value. Please enter your own.
-              </span>
+              <span className={styles.error}>{t("nisabLoading_error")}</span>
             );
             console.log(
               "\x1b[31m%s\x1b[0m",

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+import { getArabicRightStyle } from "../../util/util";
 import styles from "./ZakahCalculator.module.css";
 
 const Nisab = ({
@@ -9,24 +11,34 @@ const Nisab = ({
   nisabError: React.ReactNode | string;
   nisabValue: number | null;
 }) => {
+  const { t } = useTranslation("translation", { keyPrefix: "Header" });
+
   const renderNisabMessage = (
     loadingGoldValue: boolean,
     nisabValue: number | null,
     nisabError: React.ReactNode | string
   ) => {
+    const className = getArabicRightStyle(styles.rightAlign);
+
+    const value = Number(nisabValue).toFixed(2);
+    const symbol = nisabValue ? "$" : "";
+
     if (nisabError) {
       return nisabError;
     } else {
       if (loadingGoldValue) {
         return (
           <span className={styles.spinner} role="spinner">
-            Retrieving nisab value<span className={styles.dots}></span>
+            {t("nisabValue_loading")}
+            <span className={styles.dots}></span>
           </span>
         );
       } else {
-        return `Current nisab value: ${nisabValue ? "$" : ""}${Number(
-          nisabValue
-        )?.toFixed(2)}*`;
+        return (
+          <span className={className ? className : ""}>
+            {t("nisabValue_success", { symbol: symbol, value: value })}
+          </span>
+        );
       }
     }
   };

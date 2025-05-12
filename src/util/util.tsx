@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import { Data } from "../pages/ZakahCalculator/ZakahCalculator";
 
@@ -31,7 +32,13 @@ export const formatCurrency = (value: number) => {
   });
 };
 
-export function useWindowWidth() {
+export const getArabicRightStyle = (className: string) => {
+  const { i18n } = useTranslation();
+
+  return i18n.language === "ar-EG" && className;
+};
+
+export const useWindowWidth = () => {
   const [windowWidth, setWindowWidth] = useState(() => window.innerWidth);
 
   useEffect(() => {
@@ -42,4 +49,4 @@ export function useWindowWidth() {
   }, []);
 
   return windowWidth;
-}
+};

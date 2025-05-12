@@ -1,7 +1,6 @@
+import { useTranslation } from "react-i18next";
 import { inputTotal, zakahDue, formatCurrency } from "../../util/util.js";
-
 import { Data } from "./ZakahCalculator.js";
-
 import styles from "./ZakahCalculator.module.css";
 
 const Totals = ({
@@ -17,6 +16,8 @@ const Totals = ({
   isNegative: boolean;
   userNisabEmpty: boolean;
 }) => {
+  const { t } = useTranslation("translation", { keyPrefix: "Header" });
+
   const renderZakahDue = (
     isAboveMax: boolean,
     isNegative: boolean,
@@ -36,11 +37,11 @@ const Totals = ({
     <>
       <div className={styles.totals}>
         <div className={styles.amount}>
-          <label>Eligible For Zakah</label>
+          <label>{t("eligibleForZakah")}</label>
           <span>${formatCurrency(inputTotal(data))}</span>
         </div>
         <div className={styles.amount}>
-          <label>Your Zakah Due</label>
+          <label>{t("yourZakahDue")}</label>
           <span>{renderZakahDue(isAboveMax, isNegative, userNisabEmpty)}</span>
         </div>
       </div>

@@ -16,8 +16,8 @@
   line-height: 1.5;
   background-color: #f0f8ff;
   color: #2a2a2a;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px; */
 }
 
 .right {
@@ -43,12 +43,12 @@
 .header {
   text-align: left;
   margin-block: 0;
+  margin-top: 10px; 
 }
 
 .description {
   font-size: 15px;
   margin-block-start: 0;
-  font-style: italic;
 }
 
 .amount {
@@ -203,6 +203,24 @@ hr {
   border: none;
 }
 
+.select {
+  font-size: 18px;
+    background: #004085;
+    color: white;
+    border: none;
+}
+
+select:focus, select:active, select:checked, select:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.rightAlign {
+  text-align: right; 
+  display: block; 
+  /* for spans */
+}
+
 /* Tablet styles */
 @media (min-width: 768px) and (max-width: 1023px) {
   .left {
@@ -221,7 +239,7 @@ hr {
 
   .header {
     font-size: 25px;
-    margin-bottom: 10px;
+    margin: 0px 0px 10px 0px; 
   }
 
   .leftNav {
@@ -312,5 +330,9 @@ hr {
 
   .root {
     height: 100%;
+  }
+
+  .rightAlign {
+      margin-right: 15px; 
   }
 }
